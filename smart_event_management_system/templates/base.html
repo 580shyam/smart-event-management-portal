@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10172b">
+  <meta name="description" content="Discover events, reserve your seat, and connect with your community using Evently.">
+  <title>{% block title %}Evently — Find your next experience{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="announcement"><span class="announcement-dot"></span> Good people. Great events. Your next story starts here.</div>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="{% url 'home' %}" aria-label="Evently home"><span class="brand-mark">e</span><span>evently<span class="brand-period">.</span></span></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="{% url 'home' %}#explore">Explore events</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'dashboard' %}">My bookings</a>
+          {% if user.is_staff %}<a href="{% url 'admin_dashboard' %}">Admin</a>{% endif %}
+        {% endif %}
+      </nav>
+      <div class="nav-actions">
+        {% if user.is_authenticated %}
+          <span class="nav-hello">Hi, {{ user.username }}</span>
+          <form action="{% url 'logout' %}" method="post" class="inline-form">{% csrf_token %}<button class="button button-ghost button-small" type="submit">Log out</button></form>
+        {% else %}
+          <a class="nav-login" href="{% url 'login' %}">Log in</a>
+          <a class="button button-dark button-small" href="{% url 'signup' %}">Get started <span aria-hidden="true">↗</span></a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  {% if messages %}
+    <div class="messages-wrap" aria-live="polite">
+      {% for message in messages %}<div class="message message-{{ message.tags|default:'info' }}">{{ message }}<button type="button" class="message-close" onclick="this.parentElement.remove()" aria-label="Dismiss message">×</button></div>{% endfor %}
+    </div>
+  {% endif %}
+
+  <main>{% block content %}{% endblock %}</main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="brand brand-footer" href="{% url 'home' %}"><span class="brand-mark">e</span><span>evently<span class="brand-period">.</span></span></a>
+      <p>Make time for the things that bring us together.</p>
+      <span class="footer-copy">© {% now "Y" %} Evently · Smart Event Management System</span>
+    </div>
+  </footer>
+  <script src="{% static 'js/carousel.js' %}" defer></script>
+</body>
+</html>

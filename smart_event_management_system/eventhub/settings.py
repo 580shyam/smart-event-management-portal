@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # For local learning only. Change this before deploying publicly.
 SECRET_KEY = "django-insecure-change-this-key-before-production-2026"
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "smart-event-management-portal-5.onrender.com"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",

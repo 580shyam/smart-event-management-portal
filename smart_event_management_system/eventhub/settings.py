@@ -1,3 +1,4 @@
+
 """Settings for the beginner-friendly Smart Event Management System."""
 from pathlib import Path
 
@@ -6,7 +7,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # For local learning only. Change this before deploying publicly.
 SECRET_KEY = "django-insecure-change-this-key-before-production-2026"
 DEBUG = True
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "smart-event-management-portal-5.onrender.com"]
+
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "smart-event-management-portal-5.onrender.com",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -70,6 +76,8 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_URL = "login"
